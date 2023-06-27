@@ -1,0 +1,5 @@
+com.instana.plugin.action:
+  enabled: true
+
+com.instana.plugin.action.command:
+  enabled: true
