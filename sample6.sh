@@ -1,15 +1,8 @@
 #!/bin/bash
-# This script analyzes the data for a sudden increase compared to the previous 10 minutes
 
-# Get the current data
-current_data=$(cat /path/to/current/data)
+# Define the deployment name and desired number of replicas
+deployment_name="my-deployment"
+desired_replicas=5
 
-# Get the data from 10 minutes ago
-previous_data=$(cat /path/to/data/10minutes/ago)
-
-# Compare the current data with the previous data
-if [ "$current_data" -gt "$previous_data" ]; then
-  echo "There is a sudden increase in the data compared to the previous 10 minutes"
-else
-  echo "There is no sudden increase in the data compared to the previous 10 minutes"
-fi
+# Scale the deployment to match the desired number of replicas
+kubectl scale deployment $deployment_name --replicas=$desired_replicas
