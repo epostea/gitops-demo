@@ -1,15 +1,10 @@
 #!/bin/bash
-# This script analyzes the data for a sudden increase compared to the previous 10 minutes
 
-# Get the current data
-current_data=$(cat /path/to/current/data)
+# Retrieve the YAML representation of the flagd-config ConfigMap
+flagd_config=$(kubectl get configmap flagd-config -o yaml)
 
-# Get the data from 10 minutes ago
-previous_data=$(cat /path/to/data/10minutes/ago)
+# Extract the value of the adServiceHighCpu feature flag from the YAML
+ad_service_high_cpu=$(echo "$flagd_config" | grep adServiceHighCpu | awk '{print $2}')
 
-# Compare the current data with the previous data
-if [ "$current_data" -gt "$previous_data" ]; then
-  echo "There is a sudden increase in the data compared to the previous 10 minutes"
-else
-  echo "There is no sudden increase in the data compared to the previous 10 minutes"
-fi
+# Print the value of the adServiceHighCpu feature flag
+echo "The value of the adServiceHighCpu feature flag is: $ad_service_high_cpu"
