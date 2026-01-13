@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script enables additional tracing for the queue manager to capture more detailed information about the event.
+# It assumes that the queue manager name is provided as an argument to the script.
+
+# Check if the queue manager name is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <queue_manager_name>"
+    exit 1
+fi
+
+# Set the queue manager name
+QM_NAME=$1
+
+# Enable tracing for the queue manager
+echo "Enabling tracing for queue manager: $QM_NAME"
+strmqm -c -m $QM_NAME
+echo "Tracing enabled for queue manager: $QM_NAME"
+
+# Display the current tracing status
+echo "Current tracing status for queue manager: $QM_NAME"
+dspmqtrc -m $QM_NAME
+
+# End of script
